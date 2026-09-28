@@ -2,8 +2,9 @@ import streamlit as st
 import datetime
 from google import genai
 
-st.set_page_config(page_title="Asiya's Ultimate AI", page_icon="🧠", layout="centered")
+st.set_page_config(page_title=" Ultimate AI", page_icon="🤖", layout="centered")
 
+# 🔑 Aapki fresh API key pehle se set hai
 import os
 API_KEY = st.secrets.get("GEMINI_API_KEY")
 
@@ -20,7 +21,7 @@ def get_ai_response(user_query):
         
         system_prompt = (
             "You are a friendly, funny, and highly intelligent AI study partner named 'Super Brain'. "
-            "You are talking to Asiya. Always reply in a mix of Roman Urdu and simple English. "
+            "You are talking to friend. Always reply in a mix of Roman Urdu and simple English. "
             "Explain complex Physics, Maths, and Science concepts using funny real-life examples and emojis. "
             "Keep your responses clean, helpful, and concise."
         )
@@ -33,24 +34,24 @@ def get_ai_response(user_query):
             
         full_context += f"User: {user_query}\nModel:"
 
-        # ✅ Sahi and stable model setup bina kisi extra symbols ya pipes ke
         response = client.models.generate_content(
             model='gemini-3.8-flash',
             contents=full_context,
         )
         return response.text
+        
     except Exception as e:
-        return f"Yaar server busy hai ya connection ka masla hai. Koshish karein ke dubara send karein. Error: {str(e)}"
+        return f"Yaar server busy hai ya connection ka masla hai. Koshish karein ke dobara send karein. Error: {str(e)}"
 
-st.title("🧠 Asiya's Super AI Brain")
-st.write("Welcome! Ab yeh chatbot Physics, Maths, Science sab kuch janta hai! 🚀")
+st.title("🧠 Super AI Brain")
+st.write("Welcome! dear friend 🚀")
 st.markdown("---")
 
 if "username" not in st.session_state:
     st.session_state.username = ""
 
 if st.session_state.username == "":
-    naam_input = st.text_input("👉 Apna naam likhein aur Enter dabayein:")
+    naam_input = st.text_input("👉  Enter your name :")
     if naam_input:
         st.session_state.username = naam_input
         st.rerun()
@@ -64,7 +65,7 @@ else:
         with st.chat_message(msg["role"]):
             st.write(msg["text"])
 
-    if user_msg := st.chat_input("Mujhe se Physics, Maths ya koi bhi logical sawal poochhein..."):
+    if user_msg := st.chat_input("you can ask me what u want to know ..."):
         with st.chat_message("user"):
             st.write(user_msg)
         st.session_state.messages.append({"role": "user", "text": user_msg})
