@@ -4,8 +4,8 @@ from google import genai
 
 st.set_page_config(page_title="Asiya's Ultimate AI", page_icon="🧠", layout="centered")
 
-# 🔑 Aapki fresh API key pehle se set hai
-API_KEY = "AQ.Ab8RN6K-DVqOy-6qy0AYRgsy6JmbAtL5EB0pcYrpAut2-QcBAA"
+import os
+API_KEY = st.secrets.get("GEMINI_API_KEY")
 
 def get_ai_response(user_query):
     query_lower = user_query.lower().strip()
